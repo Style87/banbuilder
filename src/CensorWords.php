@@ -184,4 +184,19 @@ class CensorWords
 			return $newstring;
 
 	}
+	
+	/**
+	 *  Determine if a string contains at least one censored word.
+	 *  @param        string          $string        String to be tested.
+	 *  @param        bool            $fullWords     Option to censor by word only.
+	 *  bool
+	 */
+	public function isStringClean($string, $fullWords = false) {
+			
+			// generate our censor checks if they are not defined yet
+			if(!$this->censorChecks)
+				$this->generateCensorChecks($fullWords);
+			
+			return preg_match($this->censorChecks, $string) === 0;
+	}
 }
